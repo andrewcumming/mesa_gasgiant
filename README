@@ -1,1 +1,3 @@
 Generates a model of Jupiter in MESA and follows its cooling for 5 Gyr.
+
+MESA code: http://mesa.sourceforge.net
