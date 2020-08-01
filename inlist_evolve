@@ -9,7 +9,7 @@
 
     save_model_when_terminate = .true.
     save_model_filename = "planet_evolve.mod"
-    required_termination_code_string = 'max_age'
+    required_termination_code_string = 'Teff_lower_limit'
 
     set_initial_cumulative_energy_error = .true.
     new_cumulative_energy_error = 0d0
