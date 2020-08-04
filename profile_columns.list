@@ -39,6 +39,20 @@
    z_mass_fraction_metals
 
 
+   chiRho ! dlnP_dlnRho at constant T
+   chiT ! dlnP_dlnT at constant Rho
+
+   cp ! specific heat at constant total pressure
+
+   log_Lrad_div_L
+
+   opacity ! opacity measured at center of zone
+
+   grav ! gravitational acceleration (cm sec^2)
+
+   conv_vel ! convection velocity (cm/sec)
+
+
 ! everything below this line is deactivated
 
 
@@ -51,7 +65,6 @@
    !q ! fraction of star mass interior to outer boundary of this zone
    !log_q ! log10(q)
 
-   !grav ! gravitational acceleration (cm sec^2)
    !log_g ! log10 gravitational acceleration (cm sec^2)
    !g_div_r ! grav/radius (sec^2)
    !r_div_g ! radius/grav (sec^-2)
@@ -157,7 +170,6 @@
    !grada ! dlnT_dlnP at constant S
    !dE_dRho ! at constant T
    !cv ! specific heat at constant volume
-   !cp ! specific heat at constant total pressure
 
    !log_CpT
    !gamma1 ! dlnP_dlnRho at constant S
@@ -166,8 +178,6 @@
    !gam ! plasma interaction parameter (> 160 or so means starting crystallization)
    !free_e ! free_e is mean number of free electrons per nucleon
    !logfree_e ! log10(free_e), free_e is mean number of free electrons per nucleon
-   chiRho ! dlnP_dlnRho at constant T
-   chiT ! dlnP_dlnT at constant Rho
    !dlnRho_dlnT_const_Pgas
    !dlnRho_dlnPgas_const_T
 
@@ -336,7 +346,6 @@
 
 
 !# Opacity
-   !opacity ! opacity measured at center of zone
    !log_opacity ! log10(opacity)
    !dkap_dlnrho_face ! partial derivative of opacity wrt. ln rho (at T=const) at outer edge of cell
       !  (was previously called dkap_dlnrho_at_face)
@@ -352,7 +361,6 @@
    !log_Ledd ! log10(Leddington/Lsun) -- local Ledd, 4 pi clight G m / kap
    !log_L_div_Ledd ! log10(max(1d-12,L/Leddington))
    !log_Lrad_div_Ledd
-   !log_Lrad_div_L
    !signed_log_power ! sign(L)*log10(max(1,abs(L))) 
 
 
@@ -373,7 +381,6 @@
    !mlt_mixing_type ! value returned by mlt
    !conv_dP_term ! P is increased by factor (1 + conv_dP_term) by inclusion of convective turbulence
 
-   !conv_vel ! convection velocity (cm/sec)
    !log_conv_vel ! log10 convection velocity (cm/sec)
    !log_tau_conv_yrs ! timescale for change of conv velocity
 
