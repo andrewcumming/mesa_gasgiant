@@ -52,6 +52,8 @@
 
    conv_vel ! convection velocity (cm/sec)
 
+   csound ! sound speed
+
 
 ! everything below this line is deactivated
 

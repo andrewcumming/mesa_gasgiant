@@ -14,7 +14,7 @@ for name in files:
 
     age_string = "%.1e yrs" % (age,)
 
-    T, rho, P, chi_rho, chi_T, cp, Lratio, opacity, grav, vconv = np.loadtxt(name, skiprows = 6, usecols=(3,4,5,9,10,11,12,13,14,15), unpack = True)
+    T, rho, P, chi_rho, chi_T, cp, Lratio, opacity, grav, vconv, csound = np.loadtxt(name, skiprows = 6, usecols=(3,4,5,9,10,11,12,13,14,15,16), unpack = True)
     
     T = 10.0**T
     rho = 10.0**rho
@@ -22,7 +22,9 @@ for name in files:
     
     alpha = chi_T / chi_rho  / T
 
-    plt.plot(rho, vconv, lw=1, alpha=1, label = age_string)
+    plt.plot(rho, vconv/csound, lw=1, alpha=1, label = age_string)
+    #plt.plot(rho, csound, lw=1, alpha=1, label = age_string)
+    #plt.plot(rho, vconv, lw=1, alpha=1, label = age_string)
     #plt.plot(rho, P / rho / grav, lw=1, alpha=1, label = age_string)
     #plt.plot(rho, alpha * P / rho / cp, lw=1, alpha=1, label = age_string)
     #plt.plot(rho, 10.0**(-Lratio), lw=1, alpha=1, label = age_string)
@@ -43,7 +45,9 @@ ax.tick_params(axis='both', which='minor', labelsize=15)
 #plt.xlim((1e5,5e9))
 #plt.ylim((1e-9,1e-4))
 plt.xlabel(r'$\rho\ (\mathrm{g\ cm^{-3}})$', fontsize=14)
-plt.ylabel(r'$v_\mathrm{conv}\ (\mathrm{cm\ s^{-1}})$', fontsize=14)
+plt.ylabel(r'$v_\mathrm{conv}/c_s$', fontsize=14)
+#plt.ylabel(r'$c_s\ (\mathrm{cm\ s^{-1}})$', fontsize=14)
+#plt.ylabel(r'$v_\mathrm{conv}\ (\mathrm{cm\ s^{-1}})$', fontsize=14)
 #plt.ylabel(r'$H\ (\mathrm{cm})$', fontsize=14)
 #plt.ylabel(r'$H/H_T = \alpha gH/c_P$', fontsize=14)
 #plt.ylabel(r'$\kappa\ (\mathrm{cm^2\ g^{-1}})$', fontsize=14)
@@ -62,4 +66,6 @@ plt.ylabel(r'$v_\mathrm{conv}\ (\mathrm{cm\ s^{-1}})$', fontsize=14)
 #plt.savefig('profile_opacity.pdf',bbox_inches='tight')
 #plt.savefig('profile_H_over_HT.pdf',bbox_inches='tight')
 #plt.savefig('profile_H.pdf',bbox_inches='tight')
-plt.savefig('profile_vconv.pdf',bbox_inches='tight')
+#plt.savefig('profile_vconv.pdf',bbox_inches='tight')
+#plt.savefig('profile_csound.pdf',bbox_inches='tight')
+plt.savefig('profile_mach.pdf',bbox_inches='tight')
