@@ -5,7 +5,7 @@
     show_log_description_at_start = .false.
 
     load_saved_model = .true.
-    saved_model_name = "planet_create.mod"
+    load_model_filename = "planet_create.mod"
 
     save_model_when_terminate = .true.
     save_model_filename = "planet_core.mod"
@@ -24,31 +24,31 @@
     dlg_core_mass_per_step = 0.05d0     ! decrease if convergence problems
     relax_core_years_for_dt = 0.1d0     ! increase(?) if convergence problems
 
-    eos_file_prefix = 'mesa'
-    kappa_file_prefix = 'gs98'
-    kappa_lowT_prefix = 'lowT_Freedman11'
-
-    change_lnPgas_flag = .true.
-    new_lnPgas_flag = .true.
-
     pgstar_flag = .true.
 
 / !end of star_job
 
+&eos
+/ ! end of eos namelist
+
+&kap
+    Zbase = 0.02d0
+    kap_file_prefix = 'gs98'
+    kap_lowT_prefix = 'lowT_Freedman11'
+
+/ ! end of kap namelist
+
+
 
 &controls
-    use_gold_tolerances = .true.
-    warn_when_stop_checking_residuals = .false. ! off until evolve
+    use_gold_tolerances = .false.
+    use_gold2_tolerances = .false.
+
+    warning_limit_for_max_residual = 1d99 ! off until evolve
     warn_when_large_virial_thm_rel_err = 2d-2
-    limit_for_rel_error_in_energy_conservation = 1d99
-    hard_limit_for_rel_error_in_energy_conservation = 1d99
 
     ! check for retries and backups as part of test_suite
-    max_number_backups = 0
-    max_number_retries = 40
-    max_model_number = 120
-
-    retry_limit = 100
+    max_model_number = 500
 
     ! surface heating
     !column_depth_for_irradiation = 100.0
@@ -56,6 +56,11 @@
 
     ! when to stop
     max_age = 2.d3
+
+    ! atmosphere
+    !atm_option = 'T_tau'
+    atm_option = 'table'
+    atm_table = 'tau_100'
 
     ! knobs
     !use_lnE_for_eps_grav = .false.
@@ -68,12 +73,6 @@
     history_interval = 2
     terminal_interval = 10
     write_header_frequency = 10
-
-
-    !photo_interval = 1
-    !profile_interval = 1
-    !history_interval = 1
-    !terminal_interval = 1
 
 / ! end of controls
 
