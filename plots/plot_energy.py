@@ -1,7 +1,7 @@
 from __future__ import print_function
 import numpy as np
 import matplotlib.pyplot as plt
-#from scipy.integrate import odeint
+from scipy.integrate import simpson
 #import gasgiant as gg
 
 
@@ -25,7 +25,7 @@ def read_profile(name,dir='LOGS'):
     R = np.array([])
     M = np.array([])
     Eint = np.array([])
-    Erad = np.array([])
+    L = np.array([])
     Egrav = np.array([])
     Etot = np.array([])
     err = np.array([])
@@ -33,15 +33,15 @@ def read_profile(name,dir='LOGS'):
         data = line.split()
         count = count + 1
         if count > 6:
-            t = np.append(t,float(data[1]))
-            M = np.append(M,float(data[2]))
-            R = np.append(R,float(data[31]))
-            Erad = np.append(Erad,float(data[56])/1e43)
-            Egrav = np.append(Egrav,float(data[57])/1e43)
-            Eint = np.append(Eint,float(data[58])/1e43)
-            Etot = np.append(Etot,float(data[59])/1e43)
-            err = np.append(err,float(data[60]))
-    return t, M, R, Erad, Eint, Egrav, Etot, err
+            t = np.append(t,float(data[2]))
+            M = np.append(M,float(data[4]))
+            R = np.append(R,float(data[39]))
+            L = np.append(L,float(data[38]))
+            Egrav = np.append(Egrav,float(data[61])/1e43)
+            Eint = np.append(Eint,float(data[62])/1e43)
+            Etot = np.append(Etot,float(data[60])/1e43)
+            err = np.append(err,float(data[63]))
+    return t, M, R, L, Eint, Egrav, Etot, err
 
 
 msol_me = 1.9892e33/5.9764e27
@@ -61,7 +61,7 @@ ax = fig.add_subplot(1,1,1)
 
 
 
-t, M, R, Erad, Eint, Egrav, Etot, err = read_profile('history_cool_jupiter','.')
+t, M, R, L, Eint, Egrav, Etot, err = read_profile('history_cool_jupiter','.')
 #t, M, R, Erad, Eint, Egrav, Etot, err = read_profile('history','LOGS')
 
 # normalize by GM^2/R -- grav + int should be -(3/7)GM^2/R for a n=3/2 polytrope
@@ -71,11 +71,16 @@ t, M, R, Erad, Eint, Egrav, Etot, err = read_profile('history_cool_jupiter','.')
 #Egrav = Egrav / norm
 #Etot = Etot / norm
 
+# it would seem that MESA no longer provides the cumulative luminosity as an output, so make our own version here
+Erad = np.zeros(len(L))
+for i in range(1,len(L)):
+    Erad[i] = 3.15e7 * simpson(L[:i+1], t[:i+1]) 
+Erad = Erad / 1e43 
 
-#plt.plot(t,Erad, 'C1', label = r'$E_{rad}$')
+#plt.plot(t,-Erad, 'C3', label = r'$-E_{rad}$')
 #plt.plot(t,Eint, 'C0--', label = r'$E_i$')
 plt.plot(t,Eint+Egrav+Erad, label = r'$E_\mathrm{grav}+E_\mathrm{int}+\int\, L\, dt$')
-plt.plot(t,(-Erad+Etot[0]), label = r'$E_\mathrm{grav}+E_\mathrm{int}$')
+plt.plot(t,Eint+Egrav, label = r'$E_\mathrm{grav}+E_\mathrm{int}$')
 plt.plot(t,Egrav, label = r'$E_\mathrm{grav}$')
 
 #plt.plot(t,(-Erad+Etot[0])*(1.0-err), 'C4--', label = r'Predicted $E_{tot}$')

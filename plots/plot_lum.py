@@ -26,14 +26,14 @@ def read_profile(name,dir='LOGS'):
              data = line.split()
              count = count + 1
              if count > 6:
-                 t = np.append(t, float(data[1]))
-                 mconv = np.append(mconv,float(data[6]))
-                 mdot = np.append(mdot,10.0**float(data[54]) * msol_me)
-                 mass = np.append(mass,float(data[2]) * msol_mj)
-                 L = np.append(L,float(data[32]))#*Lsun)
-                 R = np.append(R,float(data[34])/rj)
-                 P0 = np.append(P0,10.0**float(data[36]))
-                 T0 = np.append(T0,10.0**float(data[37]))
+                 t = np.append(t, float(data[2]))
+                 mconv = np.append(mconv,float(data[8]))
+                 mdot = np.append(mdot,10.0**float(data[7]) * msol_me)
+                 mass = np.append(mass,float(data[4]) * msol_mj)
+                 L = np.append(L,float(data[38])/Lsun)
+                 R = np.append(R,float(data[40])*Rsun/rj)
+                 P0 = np.append(P0,10.0**float(data[43]))
+                 T0 = np.append(T0,10.0**float(data[44]))
          return t, mconv, mdot, R, mass, P0, T0, L
     except:
          return (-1,), (-1,), (-1,), (-1,), (-1,), (-1,), (-1,), (-1,)
@@ -106,6 +106,7 @@ def plot_one(normalizeL):
 msol_me = 1.9892e33/5.9764e27
 msol_mj = 1.9892e33/1.8986e30
 rj = 6.9911e9
+Rsun = 6.957e10
 Lsun = 3.8418e33
 
 # Make two plots: one is the cooling curve L vs t

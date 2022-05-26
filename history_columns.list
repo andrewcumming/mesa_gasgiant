@@ -492,7 +492,7 @@
    !## conditions at or near the surface of the model (outer edge of outer cell)
 
       !luminosity ! luminosity in Lsun units
-      !luminosity_ergs_s ! luminosity in cgs units
+      luminosity_ergs_s ! luminosity in cgs units
       log_L ! log10 luminosity in Lsun units
       !log_L_ergs_s ! log10 luminosity in cgs units
       radius ! Rsun
@@ -758,7 +758,7 @@
 
 !# energy information
 
-      !total_energy ! at end of step
+      total_energy ! at end of step
       !log_total_energy ! log(abs(total_energy))
       !total_energy_after_adjust_mass ! after mass adjustments
 
@@ -767,7 +767,7 @@
       !log_tot_E
 
 
-      !total_gravitational_energy
+      total_gravitational_energy
       !log_total_gravitational_energy ! log(abs(total_gravitational_energy))
       !total_gravitational_energy_after_adjust_mass
 
@@ -775,7 +775,7 @@
       !tot_PE
       !log_tot_PE
 
-      !total_internal_energy
+      total_internal_energy
       !log_total_internal_energy
       !total_internal_energy_after_adjust_mass
 
@@ -825,7 +825,7 @@
       !error_in_energy_conservation ! for this step
          ! = total_energy - (total_energy_start + total_energy_sources_and_sinks)
       !cumulative_energy_error ! = sum over all steps of error_in_energy_conservation
-      !rel_cumulative_energy_error ! = cumulative_energy_error/total_energy
+      rel_cumulative_energy_error ! = cumulative_energy_error/total_energy
       !log_rel_cumulative_energy_error ! = log10 of rel_cumulative_energy_error
       !log_rel_run_E_err ! shorter name for rel_cumulative_energy_error
 

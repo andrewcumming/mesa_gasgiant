@@ -66,7 +66,7 @@
 
     ! output to files and  terminal
     photo_interval = 50
-    profile_interval = 50
+    profile_interval = 20
     max_num_profile_models=1000
     history_interval = 2
     terminal_interval = 1

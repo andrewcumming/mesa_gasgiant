@@ -38,6 +38,16 @@
    y_mass_fraction_He
    z_mass_fraction_metals
 
+    chiRho ! dlnP_dlnRho at constant T
+    chiT ! dlnP_dlnT at constant Rho
+    cp ! specific heat at constant total pressure
+    log_Lrad_div_L
+    opacity ! opacity measured at center of zone
+    grav ! gravitational acceleration (cm sec^2)
+    conv_vel ! convection velocity (cm/sec)
+    csound ! sound speed
+    
+
 
 ! everything below this line is deactivated
 
